@@ -1,3 +1,3 @@
-# Aesol-Datei für das Graphical User Interface
+# AesoQ-Datei fuer das Graphical User Interface
 
 import tkinter as tk
