@@ -1,0 +1,4 @@
+AesoQ
+=====
+
+Aequationem quadratam solvere
