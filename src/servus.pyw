@@ -1,4 +1,4 @@
-# AesoQ - Datei für Funktionen
+# AesoQ - Datei für Funktionen (letzte Änderung 24.12.14)
 
 import math
 import tkinter as tk
@@ -50,11 +50,13 @@ def mitternachtsformel (a, b, c):
         try:
             rdx = b**2-4*a*c
             if math.sqrt(rdx) == 0:
-                return [1, -b / 2*a]
+                fenster("Es gibt eine Lösung für x:\t" + str(-b / 2*a))
             else:
-                return [2, [(-b - math.sqrt(rdx))/2*a, (-b + math.sqrt(rdx))/2*a]]
+                x1 = (-b - math.sqrt(rdx))/2*a
+                x2 = (-b + math.sqrt(rdx))/2*a
+                fenster("Es gibt zwei Lösungen für x:\n1. " + x1 + "\n2. " + x2)
         except ValueError:
-            return [0, None]
+            fenster("Es gibt für x keine Lösung.")
     else:
         fehler(0)
 
@@ -66,15 +68,13 @@ def pqformel (p, q):
     if type(p) == int and type(q) == int:
         try:
             if math.sqrt((p/2)**2-q) == 0:
-                return [1, -p/2]
                 fenster("Es gibt eine Lösung für x:\t" + str(-p/2))
             else:
                 x1 = -p/2 - math.sqrt((p/2)**2-q)
                 x2 = -p/2 + math.sqrt((p/2)**2-q)
-                return [2, [x1, x2]]
                 fenster("Es gibt zwei Lösungen für x:\n1. " + x1 + "\n2. " + x2)
         except ValueError:
-            return [0, None]
+            fenster("Es gibt für x keine Lösung.")
     else:
         fehler(0)
  
@@ -98,7 +98,7 @@ def fehler(meldung):
                    
 def fenster(text):
     fenster = tk.Tk()
-    fenster.title("Fehler")
+    fenster.title("AesoQ")
     tk.Label(fenster, text=text).pack()
     tk.Button(fenster, text="Schließen", command=fenster.destroy).pack()
     
@@ -106,8 +106,18 @@ def gui_hilfe():
     """
     zeigt Hilfefenster an
     """
-    # INCLUDE README
-    fenster("(include readme)")
+    f = open("../readme.txt",mode="r")
+    l = f.readlines()
+    t = str()
+    for elem in l:
+        t += elem + "\n"
+    f.close()
+    h = tk.Tk()
+    h.title("AesoQ - Über")
+    g = tk.Text(h, height=20, width=50)
+    g.insert("end", t)
+    g.pack()
+    tk.Button(fenster, text="Schließen", command=h.destroy).pack()
     
 def gui_ueber():
     """
@@ -115,3 +125,4 @@ def gui_ueber():
     """
     # ÜBERSEITE
     fenster("(Über-Seite)")
+    

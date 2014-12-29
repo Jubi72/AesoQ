@@ -1,9 +1,15 @@
-# AesoQ-Datei fuer das Graphical User Interface
+# AesoQ-Datei fuer das Graphical User Interface (letzte Änderung 24.12.14)
 
 import tkinter as tk
 import servus
+
 def start():
+
     global root
+    global a
+    global b
+    global c
+	
     root = tk.Tk()
     root.title("AesoQ")
     root.config(bg="yellow")
