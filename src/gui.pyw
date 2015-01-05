@@ -12,80 +12,99 @@ import math
 def start():
 
     global root
-    
-    global a
-    global b
-    global c
+
+    global d
+    global e
+    global f
 	
     root = tk.Tk()
     root.title("AesoQ")
     root.config(bg="yellow")
 
-    tk.Label(root, text="AesoQ", fg="blue", bg="yellow").grid(row=0, columnspan=2)
+    tk.Label(root, text="AesoQ", fg="blue", bg="yellow", font="Georgia 18").grid(row=0, columnspan=2)
 
-    tk.Label(root, text="a\t",     bg="yellow").grid(row=1)
-    tk.Label(root, text="b (p)\t", bg="yellow").grid(row=2)
-    tk.Label(root, text="c (q)\t", bg="yellow").grid(row=3)
+    tk.Label(root, text="a",     bg="yellow").grid(row=1)
+    tk.Label(root, text="b (p)", bg="yellow").grid(row=2)
+    tk.Label(root, text="c (q)", bg="yellow").grid(row=3)
 
-    a = int()
-    b = int()
-    c = int()
-
-    d = tk.Entry(root, textvariable = a)
+    d = tk.Entry(root)
     d.grid(row=1, column=1)
     
-    e = tk.Entry(root, textvariable = b)
+    e = tk.Entry(root)
     e.grid(row=2, column=1)
     
-    f = tk.Entry(root, textvariable = c)
+    f = tk.Entry(root)
     f.grid(row=3, column=1)
-
-    abcbut = tk.Button(root, text="abc-Formel", bg="lightgreen")
-    abcbut.bind('<Button>', lambda event:mitternachtsformel (a, b, c))
-    abcbut.grid(row=4,column=0)
 	
     pqbut = tk.Button(root, text="pq-Formel", bg="lightgreen")
-    pqbut.bind("<Button>", lambda event:pqformel(b,c))
-    pqbut.grid(row=4,column=1)
-	
+    pqbut.bind("<Button>", lambda event:pqformel())
+    pqbut.grid(row=4,column=0)
+
+    abcbut = tk.Button(root, text="abc-Formel", bg="lightgreen")
+    abcbut.bind('<Button>', lambda event:mitternachtsformel())
+    abcbut.grid(row=4,column=1)
+    
     menu()
 
 # LOGICAL FUNCTTIONS
 
-def mitternachtsformel (a, b, c):
+def mitternachtsformel ():
     """
     Voraussetzung: Punkte für Mitternachtsformel als Integer angegeben
     Ergebnis: Anzahl x und x geliefert
     """
+    try:
+        a = int(d.get())
+        b = int(e.get())
+        c = int(f.get())
+    except:
+        fehler(0)
     try:
         rdx = b**2-4*a*c
+        #fenster("radx: " + str(rdx))
         if math.sqrt(rdx) == 0:
-            fenster("Es gibt eine Lösung für x:\t" + str(-b / 2*a))
+            answ = "Es gibt eine Lösung für x:\t" + str(-b / 2*a)
         else:
             x1 = (-b - math.sqrt(rdx))/2*a
+            #fenster("x1 " + str(x1))
             x2 = (-b + math.sqrt(rdx))/2*a
-            fenster("Es gibt zwei Lösungen für x:\n1. " + x1 + "\n2. " + x2)
+            #fenster("x2 " + str(x2))
+            answ = "Es gibt zwei Lösungen für x:\n1.  " + str(x1) + "\n2.  " + str(x2)
     except ValueError:
-        fenster("Es gibt für x keine Lösung.")
+        answ = "Es gibt für x keine Lösung."
     except:
         fehler(2)
+        return
     
-def pqformel (p, q):
+    answ += "\nÜbergebene Gleichung:\n0 = " + str(a) + "x² + " + str(b) + "x +" + str(c)
+    fenster(answ)
+    
+def pqformel ():
     """
     Voraussetzung: Punkte für Mitternachtsformel als Integer angegeben
     Ergebnis: Anzahl x und x geliefert
     """
     try:
+        p = int(e.get())
+        q = int(f.get())
+    except:
+        fehler(0)
+        
+    try:
         if math.sqrt((p/2)**2-q) == 0:
-            fenster("Es gibt eine Lösung für x:\t" + str(-p/2))
+            answ = "Es gibt eine Lösung für x:\t" + str(-p/2)
         else:
             x1 = -p/2 - math.sqrt((p/2)**2-q)
             x2 = -p/2 + math.sqrt((p/2)**2-q)
-            fenster("Es gibt zwei Lösungen für x:\n1. " + x1 + "\n2. " + x2)
+            answ = "Es gibt zwei Lösungen für x:\n1. " + str(x1) + "\n2. " + str(x2)
     except ValueError:
-        fenster("Es gibt für x keine Lösung.")
+        answ = "Es gibt für x keine Lösung."
     except:
         fehler(2)
+        return
+    
+    answ += "\nÜbergebene Gleichung:\n0 = x² + " + str(p) + "x + " + str(q)
+    fenster(answ)
     
 def fehler(meldung):
     """
@@ -135,7 +154,13 @@ def gui_hilfe():
     zeigt Hilfefenster an
     """
     hilfe = """
-    (Hier kommt noch die Hilfe hin)
+    Die Quadratische Funktion muss zuerst manuell in die Form ax² + bx + c = 0 gebracht werden.
+    Dann werden die Variablen a, b und c in die jeweiligen Felder, wo a, b und c davor steht,
+    eingetragen und auf abc-Formel klicken. Dann öffnet sich ein Fenster, in dem steht, wie viele
+    Lösungen und wenn, welche es für x gibt.
+	
+    Genauso geht man vor, wenn a = 1 ist, nur dass dann ein Klick auf pq-Formel hilfreich sein könnte.
+    Man kann a auch frei lassen.
     """
     fenster(hilfe)
 
@@ -148,7 +173,7 @@ def gui_ueber():
 
     Copyright Julius Bittner 2015
     Version 0.1
-	Release: 05.01.2015
+    Release: 05.01.2015
 
     License: CC-BY 3.0
     """
