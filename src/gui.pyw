@@ -1,7 +1,7 @@
 # ----------------------------------------------------- #
 # AesoQ - Programm zum Loesen quadratischer Gleichungen #
 # Erstellt von Julius Bittner 10.12.2014                #
-# Letztes Aenderungsdatum 01.01.15                      #
+# Letztes Aenderungsdatum 05.01.15                      #
 # ------------------------------------------------------#
 
 import tkinter as tk
@@ -40,16 +40,13 @@ def start():
     f.grid(row=3, column=1)
     f.insert(0, "0")
 
-    abcbut = tk.Button(root, text="abc-Formel", bg="lightgreen",
-                       command=mitternachtsformel(a, b, c)
-                       )
+    abcbut = tk.Button(root, text="abc-Formel", bg="lightgreen")
+    abcbut.bind('<Button>', lambda event:mitternachtsformel (a, b, c))
     abcbut.grid(row=4,column=0)
-    abcbut.bind('<Control-a>',mitternachtsformel (a, b, c))
-    pqbut  = tk.Button(root, text="pq-Formel", bg="lightgreen",
-                       command=pqformel(b, c)
-                       )
+    pqbut = tk.Button(root, text="pq-Formel", bg="lightgreen")
+    pqbut.bind("<Button>", lambda event:pqformel(b,c))
     pqbut.grid(row=4,column=1)
-    pqbut.bind('<Control-p>', pqformel(b, c))
+	
     menu()
 
 # LOGICAL FUNCTTIONS
@@ -158,6 +155,7 @@ def gui_ueber():
 
     Copyright Julius Bittner 2015
     Version 0.1
+	Release: 05.01.2015
 
     License: CC-BY 3.0
     """
@@ -167,4 +165,4 @@ start()
     
 # ENDE
 
-tk.mainloop(6)
+tk.mainloop()
