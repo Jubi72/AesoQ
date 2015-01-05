@@ -12,6 +12,7 @@ import math
 def start():
 
     global root
+    
     global a
     global b
     global c
@@ -22,9 +23,9 @@ def start():
 
     tk.Label(root, text="AesoQ", fg="blue", bg="yellow").grid(row=0, columnspan=2)
 
-    tk.Label(root, text="a",     bg="yellow").grid(row=1)
-    tk.Label(root, text="b (p)", bg="yellow").grid(row=2)
-    tk.Label(root, text="c (q)", bg="yellow").grid(row=3)
+    tk.Label(root, text="a\t",     bg="yellow").grid(row=1)
+    tk.Label(root, text="b (p)\t", bg="yellow").grid(row=2)
+    tk.Label(root, text="c (q)\t", bg="yellow").grid(row=3)
 
     a = int()
     b = int()
@@ -32,17 +33,17 @@ def start():
 
     d = tk.Entry(root, textvariable = a)
     d.grid(row=1, column=1)
-    d.insert(0, "1")
+    
     e = tk.Entry(root, textvariable = b)
     e.grid(row=2, column=1)
-    e.insert(0, "1")
+    
     f = tk.Entry(root, textvariable = c)
     f.grid(row=3, column=1)
-    f.insert(0, "0")
 
     abcbut = tk.Button(root, text="abc-Formel", bg="lightgreen")
     abcbut.bind('<Button>', lambda event:mitternachtsformel (a, b, c))
     abcbut.grid(row=4,column=0)
+	
     pqbut = tk.Button(root, text="pq-Formel", bg="lightgreen")
     pqbut.bind("<Button>", lambda event:pqformel(b,c))
     pqbut.grid(row=4,column=1)
@@ -133,18 +134,10 @@ def gui_hilfe():
     """
     zeigt Hilfefenster an
     """
-    f = open("../readme.txt",mode="r")
-    l = f.readlines()
-    t = str()
-    for elem in l:
-        t += elem + "\n"
-    f.close()
-    h = tk.Tk()
-    h.title("AesoQ - Über")
-    g = tk.Text(h, height=20, width=50)
-    g.insert("end", t)
-    g.pack()
-    tk.Button(fenster, text="Schließen", command=h.destroy).pack()
+    hilfe = """
+    (Hier kommt noch die Hilfe hin)
+    """
+    fenster(hilfe)
 
 def gui_ueber():
     """
