@@ -1,7 +1,7 @@
 # ------------------------------------------------------ #
 # AesoQ - Programm zum Loesen quadratischer Gleichungen  #
 # Erstellt von Julius Bittner 10.12.2014                 #
-# Letztes Aenderungsdatum 05.01.15                       #
+# Letztes Aenderungsdatum 07.01.15                       #
 # ------------------------------------------------------ #
 
 import tkinter as tk
